@@ -1079,6 +1079,26 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1385552093}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1517182351 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 458423240, guid: afcccfc474deab34ebfe612791262aaf,
+    type: 3}
+  m_PrefabInstance: {fileID: 7187621492485173657}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1517182354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1517182351}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65c780eb3e2b25045b9cc51afe60a3a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TimeBetweenAttack: 2
+  TimeTillAttack: 0
 --- !u!1 &1542826317
 GameObject:
   m_ObjectHideFlags: 0
@@ -1489,5 +1509,9 @@ PrefabInstance:
       propertyPath: HomePosition
       value: 
       objectReference: {fileID: 72542372}
+    - target: {fileID: 1092767282, guid: afcccfc474deab34ebfe612791262aaf, type: 3}
+      propertyPath: TimeBetweenAttack
+      value: 0.3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: afcccfc474deab34ebfe612791262aaf, type: 3}

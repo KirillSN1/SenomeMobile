@@ -24,6 +24,8 @@ public class PlayerBehaviour : MonoBehaviour
     private Rigidbody2D rb;
     private bool isGrounded = false;
 
+  //  public enum PlayerStates { Idling, Jumping, Attacking, Walking, Dying };
+   // public PlayerStates playerState = PlayerStates.Idling;
 
     void Start()
     {
@@ -41,8 +43,8 @@ public class PlayerBehaviour : MonoBehaviour
    
         float MInput = Input.GetAxisRaw("Horizontal");
         rb.velocity = new Vector2(MInput * Speed, rb.velocity.y);
-            
-        
+ 
+
         if (Input.GetKeyDown(JumpButton) && isGrounded)
         {
             rb.velocity = Vector2.up * JumpingVelocity;
@@ -51,9 +53,11 @@ public class PlayerBehaviour : MonoBehaviour
         isGrounded = Physics2D.OverlapCircle(Feet.position, feetRadius, Groundlayer);
     }   
 
-    public void ReceiveDamage(int takenDamage)
+    public IEnumerator ReceiveDamage(int takenDamage)
     {
         Health -= takenDamage;
+        yield return null;
+     //   yield return new WaitForSeconds(3f);       // здесь выставить время, которое занимает анимация игрока, получившего урон
     }
        
 }

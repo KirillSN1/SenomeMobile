@@ -67,10 +67,12 @@
     <Compile Include="Assets\Scripts\EnemyBasicAI.cs" />
     <Compile Include="Assets\Scripts\EnemySettings.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Scripts\HurtBox.cs" />
     <Compile Include="Assets\Scripts\PlayerBehaviour.cs" />
     <Compile Include="Assets\Scripts\PlayerHeartsContainer.cs" />
     <Compile Include="Assets\Scripts\Res.cs" />
     <Reference Include="Unity.Timeline.Editor">
+<<<<<<< HEAD
       <HintPath>D:/K I R I L L S  F O L D E R/Projects/Senome_Mobile/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VSCode.Editor">
@@ -102,6 +104,39 @@
     </Reference>
     <Reference Include="UnityEditor.UI">
       <HintPath>D:/K I R I L L S  F O L D E R/Projects/Senome_Mobile/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+=======
+      <HintPath>C:/Users/Катя/Documents/GitHub/SenomeMobile/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.VSCode.Editor">
+      <HintPath>C:/Users/Катя/Documents/GitHub/SenomeMobile/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.TextMeshPro.Editor">
+      <HintPath>C:/Users/Катя/Documents/GitHub/SenomeMobile/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>C:/Users/Катя/Documents/GitHub/SenomeMobile/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Timeline">
+      <HintPath>C:/Users/Катя/Documents/GitHub/SenomeMobile/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.CollabProxy.Editor">
+      <HintPath>C:/Users/Катя/Documents/GitHub/SenomeMobile/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Rider.Editor">
+      <HintPath>C:/Users/Катя/Documents/GitHub/SenomeMobile/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.Sprite.Editor">
+      <HintPath>C:/Users/Катя/Documents/GitHub/SenomeMobile/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.Tilemap.Editor">
+      <HintPath>C:/Users/Катя/Documents/GitHub/SenomeMobile/Library/ScriptAssemblies/Unity.2D.Tilemap.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.TextMeshPro">
+      <HintPath>C:/Users/Катя/Documents/GitHub/SenomeMobile/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.UI">
+      <HintPath>C:/Users/Катя/Documents/GitHub/SenomeMobile/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+>>>>>>> f4fa3a93ce3224167d30aa092d62a73fda46e0e9
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>D:/П А П К А   К И Р И Л Л А/GameDev/UnityP/2019.2.2f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>

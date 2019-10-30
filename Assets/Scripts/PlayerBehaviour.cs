@@ -30,6 +30,8 @@ public class PlayerBehaviour : MonoBehaviour
     
     
 
+  //  public enum PlayerStates { Idling, Jumping, Attacking, Walking, Dying };
+   // public PlayerStates playerState = PlayerStates.Idling;
 
     void Start()
     {
@@ -48,8 +50,13 @@ public class PlayerBehaviour : MonoBehaviour
    
         MInput = Input.GetAxisRaw("Horizontal");
         rb.velocity = new Vector2(MInput * Speed, rb.velocity.y);
+<<<<<<< HEAD
         JVelos = rb.velocity;    
         
+=======
+ 
+
+>>>>>>> f4fa3a93ce3224167d30aa092d62a73fda46e0e9
         if (Input.GetKeyDown(JumpButton) && isGrounded)
         {
             rb.velocity = Vector2.up * JumpingVelocity;
@@ -59,9 +66,11 @@ public class PlayerBehaviour : MonoBehaviour
         AnimatinCont();
     }   
 
-    public void ReceiveDamage(int takenDamage)
+    public IEnumerator ReceiveDamage(int takenDamage)
     {
         Health -= takenDamage;
+        yield return null;
+     //   yield return new WaitForSeconds(3f);       // здесь выставить время, которое занимает анимация игрока, получившего урон
     }
 
     public void AnimatinCont()

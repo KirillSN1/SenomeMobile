@@ -5,10 +5,12 @@ using UnityEngine;
 public class EnemySettings : MonoBehaviour
 { 
     public string Name = "Kevin";
-    public int Attack = 1;
-    public int Health = 2;
+    public int Attack = 1;    
     public float Speed = 2.0f;
-    
+
+  //  [HideInInspector]
+    public int Health = 5;       // значение не менять, т.к. здоровье над врагом состоит из 5 сердечек
+
     // Start is called before the first frame update
     void Start()
     {

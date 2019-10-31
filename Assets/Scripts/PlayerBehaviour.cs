@@ -53,10 +53,13 @@ public class PlayerBehaviour : MonoBehaviour
 
         JVelos = rb.velocity;    
         
+<<<<<<< HEAD
 
  
 
 
+=======
+>>>>>>> b4d775b00476fb4f7c4791a506286a9e9aa858be
         if (Input.GetKeyDown(JumpButton) && isGrounded)
         {
             rb.velocity = Vector2.up * JumpingVelocity;

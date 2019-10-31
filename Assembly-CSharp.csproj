@@ -65,6 +65,7 @@
     <Compile Include="Assets\Scripts\CameraMovement.cs" />
     <Compile Include="Assets\Scripts\DeathPoint.cs" />
     <Compile Include="Assets\Scripts\EnemyBasicAI.cs" />
+    <Compile Include="Assets\Scripts\EnemyHeartsContainer.cs" />
     <Compile Include="Assets\Scripts\EnemySettings.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\HurtBox.cs" />

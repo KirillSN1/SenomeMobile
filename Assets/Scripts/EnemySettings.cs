@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class EnemySettings : MonoBehaviour
 {
+    private enum EnemyStates { Idling, Attacking, Running, ReceivingDamage, Dying };
+    private EnemyStates enemyState = EnemyStates.Idling;
+
     [Header("Enemy Attributes")]
     public string Name = "Kevin";
     public int Attack = 1;    

@@ -22,7 +22,7 @@ public class HurtBox : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (other != null && other.gameObject.tag == "Player")
+        if (other != null && other.tag == "Player")
         {
             // Debug.Log("Time till attack" + TimeTillAttack);
 

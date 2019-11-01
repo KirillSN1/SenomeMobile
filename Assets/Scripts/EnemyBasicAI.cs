@@ -18,9 +18,6 @@ public class EnemyBasicAI : EnemySettings
 
     private enum LookingDirections { Left = -1, Right = 1 };     // для анимации - выбор стороны для поворота
 
-    private enum EnemyStates { Idling, Attacking, Running, ReceivingDamage, Dying };
-    private EnemyStates enemyState = EnemyStates.Idling;
-
     void Start()
     {
         Target = GameObject.FindGameObjectWithTag("Player").transform;

@@ -12,8 +12,7 @@ public class PlayerHeartsContainer : MonoBehaviour
 
     void Start()
     {
-
-        Image = GetComponent<Image>();
+         Image = GetComponent<Image>();
     }
 
 

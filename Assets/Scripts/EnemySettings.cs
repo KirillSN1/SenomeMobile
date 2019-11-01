@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemySettings : MonoBehaviour
-{ 
+{
+    [Header("Enemy Attributes")]
     public string Name = "Kevin";
     public int Attack = 1;    
     public float Speed = 2.0f;

@@ -15,6 +15,7 @@ public class EnemyBasicAI : EnemySettings
     //public float RetreatDistance = 4.0f;
 
     private Animator _anim;
+    private bool _isAlive;
 
     private enum LookingDirections { Left = -1, Right = 1 };     // для анимации - выбор стороны для поворота
 
@@ -22,6 +23,7 @@ public class EnemyBasicAI : EnemySettings
     {
         Target = GameObject.FindGameObjectWithTag("Player").transform;
         _anim = GetComponent<Animator>();
+        _isAlive = true;
     }
 
     

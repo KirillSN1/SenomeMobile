@@ -10,7 +10,7 @@ public class PlayerHeartsContainer : MonoBehaviour
 
     private int _playerHealth;
 
-    void Start()
+    void Awake()
     {
 
         Image = GetComponent<Image>();

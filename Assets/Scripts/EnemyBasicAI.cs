@@ -14,7 +14,7 @@ public class EnemyBasicAI : EnemySettings
 
     private Animator _anim;
 
-    private enum LookingDirections { Left = -1, Right = 1 };     // для анимации
+    private enum LookingDirections { Left, Right };     // для анимации
 
     private enum EnemyStates { Idling, Attacking, Walking, Dying };
     private EnemyStates enemyState = EnemyStates.Idling;
@@ -45,23 +45,28 @@ public class EnemyBasicAI : EnemySettings
 
     public void ChaseThePlayer()
     {
-        var toHomePosition = new Vector3(HomePosition.position.x, transform.position.y, 0);
-        var distanceToHome = Vector3.Distance(transform.position, toHomePosition);
+       var distanceToTarget = Vector3.Distance(transform.position, Target.position);
 
-        var distanceToTarget = Vector3.Distance(transform.position, Target.position);
-
-        if (distanceToTarget <= ChaseRadius && distanceToTarget != StoppingDistance)  // игрок в зоне преследования
+        if(distanceToTarget <= ChaseRadius && distanceToTarget != StoppingDistance)  // игрок в зоне преследования
         {
             var toTarget = new Vector3(Target.position.x, transform.position.y, 0);
             transform.position = Vector3.MoveTowards(transform.position, toTarget, Speed * Time.deltaTime);
 
             AnimateRunning(toTarget);
         }
-        else if(distanceToTarget > ChaseRadius && distanceToHome != 0)          // игрок вышел за пределы радиуса преследования
+        else if(distanceToTarget > ChaseRadius)          // игрок вышел за пределы радиуса преследования
         {
-             transform.position = Vector3.MoveTowards(transform.position, toHomePosition, Speed * Time.deltaTime);
+            var toHomePosition = new Vector3(HomePosition.position.x, transform.position.y, 0);
 
-             AnimateRunning(toHomePosition);          
+            if (Vector3.Distance(transform.position, toHomePosition) != 0)
+            {
+               transform.position = Vector3.MoveTowards(transform.position, toHomePosition, Speed * Time.deltaTime);
+               AnimateRunning(toHomePosition);          
+            }
+            else
+            {
+                _anim.SetBool("isRunningEnemy", false);      // idle state
+            }
         }
         else     // = distanceToTarget == StoppingDistance
         {
@@ -73,6 +78,7 @@ public class EnemyBasicAI : EnemySettings
     private void AnimateRunning(Vector3 target)
     {
         _anim.SetBool("isRunningEnemy", true);
+        
 
         if (target.x > transform.position.x)
         {
@@ -90,12 +96,10 @@ public class EnemyBasicAI : EnemySettings
         switch (motionState)
         {
             case LookingDirections.Right:
-                Debug.Log("Enemy going to right");
                 _anim.SetFloat("motionH", 1);            
                 break;
 
             case LookingDirections.Left:
-                Debug.Log("Enemy going to left");
                 _anim.SetFloat("motionH", -1);
                 break;
         }

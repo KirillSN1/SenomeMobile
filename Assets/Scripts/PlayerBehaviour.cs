@@ -53,7 +53,6 @@ public class PlayerBehaviour : MonoBehaviour
         {
             IsAlive = false;
         }
-<<<<<<< HEAD
         Motion();
         AnimatinCont();
     }
@@ -71,14 +70,6 @@ public class PlayerBehaviour : MonoBehaviour
         if (KeyboardInput)
         MInput = Input.GetAxisRaw("Horizontal");
         rb.velocity = new Vector2(MInput * Speed, rb.velocity.y);
-=======
-   
-        MInput = Input.GetAxisRaw("Horizontal");
-        rb.velocity = new Vector2(MInput * Speed, rb.velocity.y);
-
-        JVelos = rb.velocity;    
-        
->>>>>>> 6f713981e7f99bccd9ec5bedc99f5b78335aca4f
         if (Input.GetKeyDown(JumpButton) && isGrounded)
         {
             rb.velocity = Vector2.up * JumpingVelocity;

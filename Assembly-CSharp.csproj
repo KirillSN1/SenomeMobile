@@ -69,6 +69,7 @@
     <Compile Include="Assets\Scripts\EnemySettings.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\HurtBox.cs" />
+    <Compile Include="Assets\Scripts\KnockBack.cs" />
     <Compile Include="Assets\Scripts\PlayerBehaviour.cs" />
     <Compile Include="Assets\Scripts\PlayerHeartsContainer.cs" />
     <Compile Include="Assets\Scripts\Res.cs" />

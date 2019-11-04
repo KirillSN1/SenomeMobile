@@ -168,10 +168,13 @@ MonoBehaviour:
   Name: Kevin
   Attack: 1
   Speed: 2
+  IsAlive: 1
   Health: 5
   ChaseRadius: 5
   Target: {fileID: 0}
   HomePosition: {x: 11.2, y: -2.5, z: 0}
+  Anim: {fileID: 0}
+  EnemyState: 0
 --- !u!1 &1607642192232262246
 GameObject:
   m_ObjectHideFlags: 0

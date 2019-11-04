@@ -14,96 +14,114 @@ public class EnemyBasicAI : EnemySettings
 
     //public float RetreatDistance = 4.0f;
 
-    private Animator _anim;
-    private bool _isAlive;
+    public Animator Anim;
 
     private enum LookingDirections { Left = -1, Right = 1 };     // для анимации - выбор стороны для поворота
 
-    void Start()
+    public enum EnemyStates { Idling, Attacking, Running, ReceivingDamage, Dying };
+    public EnemyStates EnemyState = EnemyStates.Idling;
+
+    void Awake()
     {
         Target = GameObject.FindGameObjectWithTag("Player").transform;
-        _anim = GetComponent<Animator>();
-        _isAlive = true;
+        Anim = GetComponent<Animator>();
+
+        IsAlive = true;
+        Anim.SetBool("isAlive", IsAlive);
     }
 
     
     void Update()
     {
-        ChaseThePlayer();
+        if (Health <= 0)
+        {
+            IsAlive = false;
+        }
+
+        if(EnemyState != EnemyStates.Attacking && EnemyState != EnemyStates.ReceivingDamage && EnemyState != EnemyStates.Dying)        ////
+            ChaseThePlayer();
+    }
+
+
+    private IEnumerator WanishingAnimation()
+    {
+        IsAlive = false;
+        EnemyState = EnemyStates.Dying;
+
+        Anim.SetBool("isAlive", IsAlive);
+        yield return null;
+
+        yield return new WaitForSeconds(.6f);
+
+        Destroy(gameObject);
+
+        yield return null;
+
     }
 
     public IEnumerator ReceiveDamage(int takenDamage)
     {
         Health -= takenDamage;
+        EnemyState = EnemyStates.ReceivingDamage;
+
+        Debug.Log("Enemy got hit!");
+
+        Anim.SetBool("isRunningEnemy", false);
+        Anim.SetBool("isReceivingDamage", true);
         yield return null;
-        //   yield return new WaitForSeconds(3f);      
-    }
 
-    public IEnumerator AttackThePlayer(Collider2D other)
-    {
-        Debug.Log("Enemy Attacking");
-        if (other != null)
+        yield return new WaitForSeconds(.6f);            // Knockback доделать
+
+        yield return null;
+
+        if(Anim != null)
         {
-            _anim.SetBool("isAttacking", true);
-            _anim.SetBool("isRunningEnemy", false);
-            var player = other.GetComponent<PlayerBehaviour>();
-
-            Debug.Log("Attack Player");
-          //  yield return null;
-
-           // yield return new WaitForSeconds(.3f);
-            StartCoroutine(player.ReceiveDamage(Attack));
-
-            
-           _anim.SetBool("isAttacking", false);
-
+          Anim.SetBool("isReceivingDamage", false);
         }
         
-         yield return null;
+        if (Health <= 0)
+        {
+            StartCoroutine(WanishingAnimation());
+        }
 
-        //PlayerMovement.Anim.SetBool("isAttacking", true);
-        ////  StartCoroutine(InstantiateArrow(placeToSpawn, placeToSpawnRotation));
-
-        //yield return null;
-
-        //yield return new WaitForSeconds(.6f);
-        //StartCoroutine(InstantiateArrow(placeToSpawn, placeToSpawnRotation));
-
-        //PlayerMovement.Anim.SetBool("isAttacking", false);
-        //yield return null;
+        yield return null;
     }
 
     public void ChaseThePlayer()
     {
+
         var toHomePosition = new Vector3(HomePosition.x, transform.position.y, 0);   // сохраняем значение оси Oy врага, чтобы спрайт не прыгал
         var distanceToHome = Vector3.Distance(transform.position, toHomePosition);
 
+        var toTarget = new Vector3(Target.position.x, transform.position.y, 0);
         var distanceToTarget = Vector3.Distance(transform.position, Target.position);
 
        
         if (distanceToTarget <= ChaseRadius)  // игрок в зоне преследования
         {
-            var toTarget = new Vector3(Target.position.x, transform.position.y, 0);
+            EnemyState = EnemyStates.Running;
             transform.position = Vector3.MoveTowards(transform.position, toTarget, Speed * Time.deltaTime);
 
             AnimateRunning(toTarget);
         }
         else if(distanceToTarget > ChaseRadius && distanceToHome != 0)    // игрок вышел за пределы радиуса преследования, но не дошел до HomePosition
         {
-             transform.position = Vector3.MoveTowards(transform.position, toHomePosition, Speed * Time.deltaTime);
+            EnemyState = EnemyStates.Running;
+            transform.position = Vector3.MoveTowards(transform.position, toHomePosition, Speed * Time.deltaTime);
 
              AnimateRunning(toHomePosition);          
         }
         else 
         {
-            _anim.SetBool("isRunningEnemy", false);      // idle state
+            Anim.SetBool("isRunningEnemy", false);      // idle state
+            EnemyState = EnemyStates.Idling;
         }
 
     }
 
     private void AnimateRunning(Vector3 target)
     {
-        _anim.SetBool("isRunningEnemy", true);
+        Anim.SetBool("isRunningEnemy", true);
 
         if (target.x > transform.position.x)
         {
@@ -121,11 +139,11 @@ public class EnemyBasicAI : EnemySettings
         switch (motionState)
         {
             case LookingDirections.Right:               
-                _anim.SetFloat("motionH", 1);            
+                Anim.SetFloat("motionH", 1);            
                 break;
 
             case LookingDirections.Left:
-                _anim.SetFloat("motionH", -1);
+                Anim.SetFloat("motionH", -1);
                 break;
         }
     }

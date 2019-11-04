@@ -49,14 +49,14 @@ public class EnemyBasicAI : EnemySettings
 
         if(distanceToTarget <= ChaseRadius && distanceToTarget != StoppingDistance)  // игрок в зоне преследования
         {
-            var toTarget = new Vector3(Target.position.x, transform.position.y, 0);
+            var toTarget = new Vector3(Target.position.x, transform.position.y, Target.position.z);
             transform.position = Vector3.MoveTowards(transform.position, toTarget, Speed * Time.deltaTime);
 
             AnimateRunning(toTarget);
         }
         else if(distanceToTarget > ChaseRadius)          // игрок вышел за пределы радиуса преследования
         {
-            var toHomePosition = new Vector3(HomePosition.position.x, transform.position.y, 0);
+            var toHomePosition = new Vector3(HomePosition.position.x, transform.position.y, Target.position.z);
 
             if (Vector3.Distance(transform.position, toHomePosition) != 0)
             {

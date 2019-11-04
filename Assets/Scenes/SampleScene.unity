@@ -1058,7 +1058,7 @@ MonoBehaviour:
   player: {fileID: 1542826317}
   GameState: 0
   CurrentLevel: SampleScene
-  NextLevel: SampleScene
+  NextLevel: 2
   GameIsOver: 0
 --- !u!1001 &1001913919
 PrefabInstance:
@@ -1158,7 +1158,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1377172884}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.084, z: 0}
+  m_LocalPosition: {x: 0, y: -0.138, z: 0}
   m_LocalScale: {x: 0.22361861, y: 0.22361861, z: 0.22361861}
   m_Children: []
   m_Father: {fileID: 1542826323}
@@ -1284,16 +1284,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99680648c62cd514298f83821bd7f526, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  KeyboardInput: 0
+  KeyboardInput: 1
   MInput: 0
   Speed: 4
-  JumpTime: 1
-  JumpingVelocity: 7.25
+  JumpingVelocity: 8
+  DoubleJump: 1
+  AccelerationValue: 1.066
+  JumpsNum: 0
   Health: 5
   JumpButton: 32
-  Up: {fileID: 0}
-  Left: {fileID: 0}
-  Right: {fileID: 0}
   Feet: {fileID: 1377172885}
   feetRadius: 0.37
   Groundlayer:
@@ -1320,7 +1319,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.32, y: 0.32}
+    oldSize: {x: 0.85333335, y: 0.42666668}
     newSize: {x: 0.26, y: 0.32}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -1360,7 +1359,7 @@ Animator:
   m_GameObject: {fileID: 1542826317}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 21c264016d1d2a44fa3cc596c03720da, type: 2}
+  m_Controller: {fileID: 9100000, guid: 6a7334885a429a64c914b7fa0fd10aae, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1407,8 +1406,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -6367560908665664636, guid: 40de9a8703e2e5a47882b0b86451c741,
-    type: 3}
+  m_Sprite: {fileID: 21300000, guid: 84ce2f114ad12bd4ebafc77060220324, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1427,7 +1425,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1542826317}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.383713, y: -2.1609683, z: 0}
+  m_LocalPosition: {x: -4.383713, y: -2.003, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children:
   - {fileID: 1377172885}
@@ -1447,8 +1445,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0032801868, y: -0.037080955}
-  m_Size: {x: 0.209613, y: 0.24089384}
+  m_Offset: {x: -0.0032801868, y: -0.08098586}
+  m_Size: {x: 0.209613, y: 0.24551539}
   m_Direction: 0
 --- !u!114 &1542826325
 MonoBehaviour:

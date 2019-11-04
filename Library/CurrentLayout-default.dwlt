@@ -21,7 +21,7 @@ MonoBehaviour:
   m_ShowMode: 4
   m_Title: 
   m_RootView: {fileID: 10}
-  m_MinSize: {x: 950, y: 544}
+  m_MinSize: {x: 950, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &2
 MonoBehaviour:
@@ -74,7 +74,7 @@ MonoBehaviour:
   m_MinSize: {x: 336, y: 272}
   m_MaxSize: {x: 14006, y: 10022}
   vertical: 0
-  controlID: 86
+  controlID: 115
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -122,8 +122,8 @@ MonoBehaviour:
     y: 30
     width: 1522
     height: 718
-  m_MinSize: {x: 681, y: 494}
-  m_MaxSize: {x: 18006, y: 14044}
+  m_MinSize: {x: 685, y: 494}
+  m_MaxSize: {x: 18010, y: 14044}
   vertical: 1
   controlID: 59
 --- !u!114 &6
@@ -147,8 +147,8 @@ MonoBehaviour:
     y: 0
     width: 1522
     height: 718
-  m_MinSize: {x: 681, y: 494}
-  m_MaxSize: {x: 18006, y: 14044}
+  m_MinSize: {x: 685, y: 494}
+  m_MaxSize: {x: 18010, y: 14044}
   vertical: 0
   controlID: 60
 --- !u!114 &7
@@ -170,8 +170,8 @@ MonoBehaviour:
     y: 0
     width: 553
     height: 718
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 279, y: 72}
+  m_MaxSize: {x: 4004, y: 4022}
   m_ActualView: {fileID: 18}
   m_Panes:
   - {fileID: 18}
@@ -252,7 +252,7 @@ MonoBehaviour:
     y: 0
     width: 1522
     height: 768
-  m_MinSize: {x: 950, y: 544}
+  m_MinSize: {x: 950, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &11
 MonoBehaviour:
@@ -375,7 +375,7 @@ MonoBehaviour:
   m_ViewDataDictionary: {fileID: 0}
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: 12650
+  m_LastSelectedObjectID: 13524
 --- !u!114 &16
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -562,22 +562,20 @@ MonoBehaviour:
     m_SceneHandles: 
     m_ShowAllHits: 0
     m_SkipHidden: 0
-    m_SearchArea: 0
-    m_Folders:
-    - Assets/Animations/Enemy
+    m_SearchArea: 1
+    m_Folders: []
   m_ViewMode: 0
   m_StartGridSize: 64
-  m_LastFolders:
-  - Assets/Pixel Adventure 1/Assets/Main Characters/Mask Dude
+  m_LastFolders: []
   m_LastFoldersGridSize: -1
-  m_LastProjectPath: "C:\\Users\\\u041A\u0430\u0442\u044F\\Documents\\GitHub\\SenomeMobile"
+  m_LastProjectPath: "C:\\Users\\\u041A\u0430\u0442\u044F\\Documents\\GitHub\\SenomeMobile\\SenomeMobileOld"
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 02ca9a3b
     m_LastClickedID: 1000000002
-    m_ExpandedIDs: 00000000ce2d0000f82d0000122e0000302e0000aa2e0000a02f000004300000143000002630000058300000cc30000056320000a2320000dc320000563300006e33000072330000
+    m_ExpandedIDs: 000000007a2d0000702e0000742e00009c2e0000b62e0000d22e0000462f0000da2f0000283000008c300000c4300000f830000032310000f23200001e33000098330000b0330000b4330000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -605,7 +603,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: ffffffff00000000ce2d0000f82d0000122e0000302e0000aa2e0000562f0000a02f000004300000143000002630000058300000cc30000056320000a2320000dc320000563300006e33000072330000
+    m_ExpandedIDs: ffffffff000000007a2d0000702e0000742e00009c2e0000b62e0000d22e0000462f0000da2f0000283000008c300000c4300000f830000032310000f23200001e33000098330000b0330000b4330000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -726,9 +724,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 6a310000
-      m_LastClickedID: 0
-      m_ExpandedIDs: 44f9ffff6cfbffff
+      m_SelectedIDs: d4340000
+      m_LastClickedID: 13524
+      m_ExpandedIDs: f4faffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -788,7 +786,7 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 7.288275, y: -0.9086434, z: -2.9961994}
+    m_Target: {x: 0.47641563, y: -4.95578, z: -5.5070753}
     speed: 2
     m_Value: {x: 7.288275, y: -0.9086434, z: -2.9961994}
   m_RenderMode: 0
@@ -823,7 +821,7 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 10.33551
+    m_Target: 35.447697
     speed: 2
     m_Value: 10.33551
   m_Ortho:

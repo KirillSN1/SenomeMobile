@@ -4,13 +4,16 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+[RequireComponent(typeof(Rigidbody2D))]
+
 public class PlayerBehaviour : MonoBehaviour
 {
     public bool KeyboardInput=false; //Управление с клавиатуры
     [HideInInspector]
     public float MInput;
     public float Speed;
-    
+    public float JumpTime = 1;
+    public int Attack = 1;
 
     [Range(1, 10)]
     public float JumpingVelocity;
@@ -24,10 +27,8 @@ public class PlayerBehaviour : MonoBehaviour
     public int Health = 5;
 
     public KeyCode JumpButton = KeyCode.Space;
-    //public Button Up;
-    //public Button Left;
-    //public Button Right;
-
+    public KeyCode AttackButton = KeyCode.E;
+     
     public Transform Feet;
     public float feetRadius;
     public LayerMask Groundlayer;
@@ -39,27 +40,25 @@ public class PlayerBehaviour : MonoBehaviour
 
     public Animator anim;
     private float scale;
+    public Vector2 JVelos;
 
-    private Collider2D Capsule;
-    private Collider2D Box;
+    private Vector2 currentPosition;
+    private Vector2 endPosition;
+    private GameObject enemy;
 
-
+    public int SightDistance = 1;
+    private KnockBack _knockBack;
 
     //  public enum PlayerStates { Idling, Jumping, Attacking, Walking, Dying };
     // public PlayerStates playerState = PlayerStates.Idling;
-    private void Awake()
-    {
-        DontDestroyOnLoad(this.gameObject);
-    }
-
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = 2;
         scale = transform.localScale.x;
-        Capsule = GetComponent<CapsuleCollider2D>();
-        Box = GetComponent<BoxCollider2D>();
+
+        _knockBack = GetComponent<KnockBack>();
     }
 
 
@@ -113,8 +112,50 @@ public class PlayerBehaviour : MonoBehaviour
             }
         }
 
+        if (Input.GetKeyDown(AttackButton) && isGrounded)      // атаковать enemy
+        {
+            DetectEnemy();
+        }
+
         isGrounded = Physics2D.OverlapCircle(Feet.position, feetRadius, Groundlayer);
+        AnimatinCont();
     }
+
+
+    public void DetectEnemy()
+    {
+        currentPosition = new Vector2(transform.position.x, transform.position.y);
+        endPosition = new Vector2(transform.position.x + SightDistance, transform.position.y + SightDistance);
+
+        var hits = Physics2D.LinecastAll(currentPosition, endPosition);
+
+        foreach (var obj in hits)
+        {
+            var targetObj = obj.collider.gameObject;
+            if (targetObj.CompareTag("Enemy"))
+            {
+                AttackTheEnemy(targetObj);
+                _knockBack.HitSomeObject(targetObj);
+            }
+        }
+    }
+
+    private void AttackTheEnemy(GameObject enemy)
+    {
+        if(enemy!= null)
+        {
+           StartCoroutine(enemy.GetComponent<EnemyBasicAI>().ReceiveDamage(Attack));
+        }
+        
+    }
+
+    //public void ReceiveDamage(int takenDamage)
+    //{
+    //    Health -= takenDamage;
+    //    Debug.Log("Player got hit!");
+    //  //  yield return null;
+    // //   yield return new WaitForSeconds(3f);       // здесь выставить время, которое занимает анимация игрока, получившего урон
+    //}
 
     public void AnimatinCont()
     {
@@ -135,23 +176,9 @@ public class PlayerBehaviour : MonoBehaviour
         else anim.SetBool("IsGrounded", false);
     }
 
-    public void InputModeChange()
+    void OnDrawGizmosSelected()      // рисует радиус атаки игрока
     {
-        if (KeyboardInput)
-        {
-            KeyboardInput = false;
-        }
-        else KeyboardInput = true;
+       Gizmos.color = Color.blue;
+       Gizmos.DrawWireSphere(transform.position, SightDistance);
     }
-
-    
-
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(Feet.transform.position, feetRadius);
-    }
-
-
-
 }

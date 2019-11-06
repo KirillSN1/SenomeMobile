@@ -6,14 +6,11 @@ public class EnemyBasicAI : EnemySettings
 {
     [Header("AI Settings")]
     public float ChaseRadius = 5f;          // радиус преследования
+    public Vector3 HomePosition;             // позиция, куда возвращается враг, если игрок вышел за пределы ChaseRadius
+
 
     [Header("Unity Settings")]
     public Transform Target;
-    public Vector3 HomePosition;             // позиция, куда возвращается враг, если игрок вышел за пределы ChaseRadius
-                                             //   public float StoppingDistance = 3f;   // максимальное расстояние, на которое враг может приблизиться к игроку
-
-    //public float RetreatDistance = 4.0f;
-
     public Animator Anim;
 
     private enum LookingDirections { Left = -1, Right = 1 };     // для анимации - выбор стороны для поворота
@@ -38,7 +35,7 @@ public class EnemyBasicAI : EnemySettings
             IsAlive = false;
         }
 
-        if (EnemyState != EnemyStates.Attacking && EnemyState != EnemyStates.ReceivingDamage && EnemyState != EnemyStates.Dying)        ////
+        if (EnemyState != EnemyStates.Attacking && EnemyState != EnemyStates.ReceivingDamage && EnemyState != EnemyStates.Dying) 
             ChaseThePlayer();
     }
 
@@ -89,7 +86,6 @@ public class EnemyBasicAI : EnemySettings
 
     public void ChaseThePlayer()
     {
-
         var toHomePosition = new Vector3(HomePosition.x, transform.position.y, 0);   // сохраняем значение оси Oy врага, чтобы спрайт не прыгал
         var distanceToHome = Vector3.Distance(transform.position, toHomePosition);
 

@@ -5,55 +5,63 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Animator))]
 
 public class PlayerBehaviour : MonoBehaviour
 {
-    public bool KeyboardInput=false; //Управление с клавиатуры
-    [HideInInspector]
-    public float MInput;
-    public float Speed;
-    public float JumpTime = 1;
+    [Header("Player Attributes")]
+
+    public int Health = 5;    // значение здоровья игрока не менять!
     public int Attack = 1;
+    public float Speed = 4;
+    public int SightDistance = 1;   // поле зрения игрока
 
     [Range(1, 10)]
     public float JumpingVelocity;
-    public bool DoubleJump=false;
-    [Range(1,1.3f)]
-    public float AccelerationValue=1.066f;
-    [HideInInspector]
-    public int JumpsNum;
-    
-    //  [HideInInspector]
-    public int Health = 5;
 
+    public bool IsAlive = true;
+    // public float JumpTime = 1;
+    // public Vector2 JVelos;
+
+    [Header("Input Settings")]
     public KeyCode JumpButton = KeyCode.Space;
     public KeyCode AttackButton = KeyCode.E;
-     
+    public bool KeyboardInput = false;          //Управление с клавиатуры
+
+    [HideInInspector]
+    public float MInput;
+
+    [Header("Unity settings")]
+
+    [Range(1, 1.3f)]
+    public float AccelerationValue = 1.066f;
+
     public Transform Feet;
     public float feetRadius;
     public LayerMask Groundlayer;
+    public Animator Anim;
 
-    public bool IsAlive = true;
+    [HideInInspector]
+    public bool DoubleJump = false;
+
+    [HideInInspector]
+    public int JumpsNum;
+
     [HideInInspector]
     public Rigidbody2D rb;
     public bool isGrounded = false;
 
-    public Animator anim;
     private float scale;
-    public Vector2 JVelos;
-
-    private Vector2 currentPosition;
-    private Vector2 endPosition;
-    private GameObject enemy;
-
-    public int SightDistance = 1;
-    private KnockBack _knockBack;
+    private Vector2 _currentPosition;
+    private Vector2 _endPosition;
+    private KnockBack _knockBack;      // экземпляр класса KnockBack, который отталкивает противника
 
     //  public enum PlayerStates { Idling, Jumping, Attacking, Walking, Dying };
     // public PlayerStates playerState = PlayerStates.Idling;
 
     void Start()
     {
+        Anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = 2;
         scale = transform.localScale.x;
@@ -61,24 +69,29 @@ public class PlayerBehaviour : MonoBehaviour
         _knockBack = GetComponent<KnockBack>();
     }
 
-
     void Update()
     {
         if (Health <= 0)
         {
             IsAlive = false;
         }
+
         Motion();
-        AnimatinCont();
-        
+        AnimationController();    
     }
 
     public IEnumerator ReceiveDamage(int takenDamage)
     {
+        Anim.SetBool("ReceiveDamage", true);
         Health -= takenDamage;
+
         yield return null;
-        anim.SetTrigger("Hit");
-        //   yield return new WaitForSeconds(3f);       // здесь выставить время, которое занимает анимация игрока, получившего урон
+
+        yield return new WaitForSeconds(.3f);            // Knockback доделать
+
+        yield return null;
+
+        Anim.SetBool("ReceiveDamage", false);
     }
 
     public void Motion()
@@ -88,12 +101,11 @@ public class PlayerBehaviour : MonoBehaviour
         rb.velocity = new Vector2(MInput * Speed, rb.velocity.y);
         if (!DoubleJump)
         {
-
             if (Input.GetKeyDown(JumpButton) && isGrounded)
             {
                 rb.velocity = Vector2.up * JumpingVelocity;
             }
-            if (rb.velocity.y < 0) //Ускорение падения
+            if (rb.velocity.y < 0)            //Ускорение падения
             {
                 rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * AccelerationValue);
             }
@@ -118,23 +130,23 @@ public class PlayerBehaviour : MonoBehaviour
         }
 
         isGrounded = Physics2D.OverlapCircle(Feet.position, feetRadius, Groundlayer);
-        AnimatinCont();
+        AnimationController();
     }
 
 
-    public void DetectEnemy()
+    public void DetectEnemy()              // определяем, что враг находится в поле зрения игрока
     {
-        currentPosition = new Vector2(transform.position.x, transform.position.y);
-        endPosition = new Vector2(transform.position.x + SightDistance, transform.position.y + SightDistance);
+        _currentPosition = new Vector2(transform.position.x, transform.position.y);
+        _endPosition = new Vector2(transform.position.x + SightDistance, transform.position.y + SightDistance);
 
-        var hits = Physics2D.LinecastAll(currentPosition, endPosition);
+        var hits = Physics2D.LinecastAll(_currentPosition, _endPosition);
 
         foreach (var obj in hits)
         {
             var targetObj = obj.collider.gameObject;
             if (targetObj.CompareTag("Enemy"))
             {
-                AttackTheEnemy(targetObj);
+                AttackTheEnemy(targetObj);     //  игрок может атаковать только, если противник находится в поле зрения 
                 _knockBack.HitSomeObject(targetObj);
             }
         }
@@ -149,18 +161,10 @@ public class PlayerBehaviour : MonoBehaviour
         
     }
 
-    //public void ReceiveDamage(int takenDamage)
-    //{
-    //    Health -= takenDamage;
-    //    Debug.Log("Player got hit!");
-    //  //  yield return null;
-    // //   yield return new WaitForSeconds(3f);       // здесь выставить время, которое занимает анимация игрока, получившего урон
-    //}
-
-    public void AnimatinCont()
+    public void AnimationController()
     {
-        anim.SetFloat("Speed", Mathf.Abs(MInput));
-        anim.SetFloat("JumpVeloc", rb.velocity.y);
+        Anim.SetFloat("Speed", Mathf.Abs(MInput));
+        Anim.SetFloat("JumpVeloc", rb.velocity.y);
         if (MInput < 0)
         {
             transform.localScale = new Vector3(-scale, transform.localScale.y, transform.localScale.z);
@@ -171,9 +175,12 @@ public class PlayerBehaviour : MonoBehaviour
         }
         if (isGrounded)
         {
-            anim.SetBool("IsGrounded", true);
+            Anim.SetBool("IsGrounded", true);
         }
-        else anim.SetBool("IsGrounded", false);
+        else
+        {
+            Anim.SetBool("IsGrounded", false);
+        }
     }
 
     void OnDrawGizmosSelected()      // рисует радиус атаки игрока

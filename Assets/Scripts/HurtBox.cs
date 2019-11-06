@@ -8,13 +8,13 @@ public class HurtBox : MonoBehaviour
     public float TimeTillAttack;
 
     private Animator _anim;
-  //  private bool _isAttacking = false;
-
     private EnemyBasicAI _enemy;
+    private KnockBack _knockBack;
 
 
     void Start()
     {
+        _knockBack = GetComponent<KnockBack>();
         _enemy = transform.parent.GetComponent<EnemyBasicAI>();
         _anim = _enemy.Anim;
 
@@ -37,7 +37,10 @@ public class HurtBox : MonoBehaviour
             if (TimeTillAttack <= 0)
             {
                 var target = other.GetComponent<Rigidbody2D>();
-               
+
+                _knockBack.HitSomeObject(target.gameObject);
+
+                Debug.Log("Trying to knock " + target.gameObject.name);
                 StartCoroutine(AttackThePlayer(target));
 
                 Debug.Log("Triggered");
@@ -54,35 +57,6 @@ public class HurtBox : MonoBehaviour
         _enemy.EnemyState = EnemyBasicAI.EnemyStates.Running;
     }
 
-
-
-    //private void HitSomeObject(Collider2D other)
-    //{
-    //    var target = other.GetComponent<Rigidbody2D>();
-
-    //    if (target != null)
-    //    {
-    //      //  Debug.Log("tag is " + target.tag);
-    //        if (target.gameObject.CompareTag("Player"))
-    //        {
-
-    //            AttackThePlayer(target);
-    //         //   Debug.Log("Gonna attack player");
-    //        }
-    //        else if (target.gameObject.CompareTag("Enemy"))
-    //        {
-    //            AttackTheEnemy(target);       
-    //        }
-    //    }
-    //}
-
-    //private void AttackTheEnemy(Rigidbody2D enemy)
-    //{
-    //    var amount = transform.parent.GetComponent<PlayerBehaviour>().Attack;
-    //    enemy.GetComponent<EnemyBasicAI>().ReceiveDamage(amount);
-
-    //}
-
     private IEnumerator AttackThePlayer(Rigidbody2D player)
     {
         _enemy.EnemyState = EnemyBasicAI.EnemyStates.Attacking;
@@ -91,17 +65,22 @@ public class HurtBox : MonoBehaviour
 
         yield return null;
 
-        yield return new WaitForSeconds(.6f);
-
         var amount = transform.parent.GetComponent<EnemyBasicAI>().Attack;
         var playerBehaviour = player.GetComponent<PlayerBehaviour>();
 
         StartCoroutine(playerBehaviour.ReceiveDamage(amount));
 
+        yield return new WaitForSeconds(.6f);
+
+        //var amount = transform.parent.GetComponent<EnemyBasicAI>().Attack;
+        //var playerBehaviour = player.GetComponent<PlayerBehaviour>();
+
+    //    StartCoroutine(playerBehaviour.ReceiveDamage(amount));
+
         _anim.SetBool("isAttacking", false);
-        yield return null; 
+      //  yield return new WaitForSeconds(.3f);    // время, которое занимает проигрыш получения удара у игрока
 
         yield return null;
-        _enemy.EnemyState = EnemyBasicAI.EnemyStates.Running;
+        _enemy.EnemyState = EnemyBasicAI.EnemyStates.Idling;
     }
 }

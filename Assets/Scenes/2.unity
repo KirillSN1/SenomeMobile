@@ -1072,7 +1072,7 @@ MonoBehaviour:
   IsAlive: 1
   JumpButton: 32
   AttackButton: 101
-  KeyboardInput: 1
+  KeyboardInput: 0
   MInput: 0
   AccelerationValue: 1.066
   Feet: {fileID: 35473642}
@@ -1356,6 +1356,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Sunnyland
+      objectReference: {fileID: 0}
+    - target: {fileID: 8120654799741487765, guid: c43d50816dc6a114a97b8ba0f6569d71,
+        type: 3}
+      propertyPath: m_TagString
+      value: Ground
       objectReference: {fileID: 0}
     - target: {fileID: 6922594021724271547, guid: c43d50816dc6a114a97b8ba0f6569d71,
         type: 3}
@@ -9104,11 +9109,9 @@ MonoBehaviour:
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'K
-
-'
+  m_Text: K
 --- !u!222 &1916369106
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -9340,13 +9343,6 @@ PrefabInstance:
       propertyPath: Target
       value: 
       objectReference: {fileID: 665896605}
-    - target: {fileID: 2119526622, guid: f082952f754c07f40bb19c7d436322e8, type: 3}
-      propertyPath: KnockBackSpeed
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2119526622, guid: f082952f754c07f40bb19c7d436322e8, type: 3}
-      propertyPath: KnockTime
-      value: 0.5
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2119526622, guid: f082952f754c07f40bb19c7d436322e8, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f082952f754c07f40bb19c7d436322e8, type: 3}

@@ -13,7 +13,6 @@ public class MobileInput : MonoBehaviour
     private bool right;
     
 
-
     private void Start()
     {
         main = GetComponent<PlayerBehaviour>();

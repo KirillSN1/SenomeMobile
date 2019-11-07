@@ -189,7 +189,7 @@ GameObject:
   - component: {fileID: 2119526622}
   m_Layer: 0
   m_Name: AttackRadius
-  m_TagString: Untagged
+  m_TagString: EnemyAttackRadius
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -260,8 +260,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bdd8be1ed3f4e14585b12ca146c8bd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  KnockBackSpeed: 3
-  KnockTime: 0.2
+  KnockBackSpeed: 7
+  KnockTime: 0.5
 --- !u!1 &4265281164396905885
 GameObject:
   m_ObjectHideFlags: 0

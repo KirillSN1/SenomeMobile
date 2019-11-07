@@ -10,12 +10,7 @@ public class KnockBack : MonoBehaviour
 
     public void HitSomeObject(GameObject other)
     {
-        if(other.tag == "Player")
-        {
-            Debug.Log("Enemy knocked back the player!");
-        }
-
-        var objToKnock = other.GetComponent<Rigidbody2D>();
+       var objToKnock = other.GetComponent<Rigidbody2D>();
 
         if (objToKnock != null)
         {

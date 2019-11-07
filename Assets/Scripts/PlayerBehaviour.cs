@@ -76,6 +76,12 @@ public class PlayerBehaviour : MonoBehaviour
             IsAlive = false;
         }
 
+        if (Input.GetKeyDown(AttackButton))      // атаковать enemy
+        {
+            Debug.Log("Pressing E");
+            DetectEnemy();
+        }
+
         Motion();
         AnimationController();    
     }
@@ -124,10 +130,10 @@ public class PlayerBehaviour : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(AttackButton) && isGrounded)      // атаковать enemy
-        {
-            DetectEnemy();
-        }
+        //if (Input.GetKeyDown(AttackButton) && isGrounded)      // атаковать enemy
+        //{
+        //    DetectEnemy();
+        //}
 
         isGrounded = Physics2D.OverlapCircle(Feet.position, feetRadius, Groundlayer);
         AnimationController();
@@ -143,11 +149,14 @@ public class PlayerBehaviour : MonoBehaviour
 
         foreach (var obj in hits)
         {
-            var targetObj = obj.collider.gameObject;
-            if (targetObj.CompareTag("Enemy"))
+            var target = obj.collider.gameObject;
+    
+            if (target.CompareTag("EnemyAttackRadius"))   // игрок увидел зону атаки противника
             {
-                AttackTheEnemy(targetObj);     //  игрок может атаковать только, если противник находится в поле зрения 
-                _knockBack.HitSomeObject(targetObj);
+                var nearestEnemy = target.transform.parent.gameObject;
+
+                 AttackTheEnemy(nearestEnemy);           // атаковать противника
+                _knockBack.HitSomeObject(nearestEnemy);
             }
         }
     }

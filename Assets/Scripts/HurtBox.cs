@@ -38,12 +38,8 @@ public class HurtBox : MonoBehaviour
             {
                 var target = other.GetComponent<Rigidbody2D>();
 
-                _knockBack.HitSomeObject(target.gameObject);
-
-                Debug.Log("Trying to knock " + target.gameObject.name);
                 StartCoroutine(AttackThePlayer(target));
 
-                Debug.Log("Triggered");
                 TimeTillAttack = TimeBetweenAttack;
             }
             TimeTillAttack -= Time.deltaTime;

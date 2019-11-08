@@ -55,6 +55,8 @@ public class PlayerBehaviour : MonoBehaviour
     private Vector2 _currentPosition;
     private Vector2 _endPosition;
     private KnockBack _knockBack;      // экземпляр класса KnockBack, который отталкивает противника
+    public AudioSource AClip;
+
 
     //  public enum PlayerStates { Idling, Jumping, Attacking, Walking, Dying };
     // public PlayerStates playerState = PlayerStates.Idling;
@@ -163,7 +165,10 @@ public class PlayerBehaviour : MonoBehaviour
 
     private IEnumerator AttackTheEnemy(GameObject enemy)
     {
+        
         Anim.SetBool("Attack", true);
+        if (Anim.GetBool("Attack"))
+        AClip.Play();
 
         yield return null;
 

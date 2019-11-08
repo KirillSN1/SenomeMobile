@@ -9087,8 +9087,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 665896597}
   GameState: 0
-  CurrentLevel: 2
-  NextLevel: 1
+  CurrentLevel: Level1
+  NextLevel: Level1
   GameIsOver: 0
 --- !u!4 &1057517455
 Transform:

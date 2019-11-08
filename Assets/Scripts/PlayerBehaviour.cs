@@ -76,12 +76,6 @@ public class PlayerBehaviour : MonoBehaviour
             IsAlive = false;
         }
 
-        if (Input.GetKeyDown(AttackButton))      // атаковать enemy
-        {
-            Debug.Log("Pressing E");
-            DetectEnemy();
-        }
-
         Motion();
         AnimationController();    
     }
@@ -130,10 +124,12 @@ public class PlayerBehaviour : MonoBehaviour
             }
         }
 
-        //if (Input.GetKeyDown(AttackButton) && isGrounded)      // атаковать enemy
-        //{
-        //    DetectEnemy();
-        //}
+        if (Input.GetKeyDown(AttackButton))      // атаковать enemy
+        {
+            Debug.Log("Pressing E");
+            DetectEnemy();
+        }
+
 
         isGrounded = Physics2D.OverlapCircle(Feet.position, feetRadius, Groundlayer);
         AnimationController();
@@ -158,6 +154,10 @@ public class PlayerBehaviour : MonoBehaviour
                  StartCoroutine(AttackTheEnemy(nearestEnemy));           // атаковать противника
                 _knockBack.HitSomeObject(nearestEnemy);
             }
+            else
+            {
+                StartCoroutine(AttackTheEnemy(null));    // если игрок не видит врага - просто влючить анимацию взамаха меча
+            }
         }
     }
 
@@ -167,7 +167,7 @@ public class PlayerBehaviour : MonoBehaviour
 
         yield return null;
 
-        if (enemy!= null)
+        if (enemy!= null)     // если врага нет - в методе просто проигрывается анимация взмаха меча
         {
            StartCoroutine(enemy.GetComponent<EnemyBasicAI>().ReceiveDamage(Attack));
         }

@@ -48,10 +48,12 @@ public class MobileInput : MonoBehaviour
     {
        right = true;
     }
+
     public void RightUp()
     {
         right = false;
     }
+
     public void Jump()
     {
         if (!main.DoubleJump)
@@ -81,6 +83,10 @@ public class MobileInput : MonoBehaviour
         }
     }
 
+    public void Attack()
+    {
+        main.DetectEnemy();
+    }
 
 
 

@@ -155,19 +155,26 @@ public class PlayerBehaviour : MonoBehaviour
             {
                 var nearestEnemy = target.transform.parent.gameObject;
 
-                 AttackTheEnemy(nearestEnemy);           // атаковать противника
+                 StartCoroutine(AttackTheEnemy(nearestEnemy));           // атаковать противника
                 _knockBack.HitSomeObject(nearestEnemy);
             }
         }
     }
 
-    private void AttackTheEnemy(GameObject enemy)
+    private IEnumerator AttackTheEnemy(GameObject enemy)
     {
-        if(enemy!= null)
+        Anim.SetBool("Attack", true);
+
+        yield return null;
+
+        if (enemy!= null)
         {
            StartCoroutine(enemy.GetComponent<EnemyBasicAI>().ReceiveDamage(Attack));
         }
-        
+
+        yield return new WaitForSeconds(.1f);
+
+        Anim.SetBool("Attack", false);
     }
 
     public void AnimationController()

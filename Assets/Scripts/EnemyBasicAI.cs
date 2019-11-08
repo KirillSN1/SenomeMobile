@@ -35,25 +35,30 @@ public class EnemyBasicAI : EnemySettings
             IsAlive = false;
         }
 
-        if (EnemyState != EnemyStates.Attacking && EnemyState != EnemyStates.ReceivingDamage && EnemyState != EnemyStates.Dying) 
+       // if (EnemyState != EnemyStates.Attacking && EnemyState != EnemyStates.ReceivingDamage && EnemyState != EnemyStates.Dying) 
+       if (EnemyState == EnemyStates.Running || EnemyState == EnemyStates.Idling)
+        {
             ChaseThePlayer();
+        }
     }
 
 
     private IEnumerator WanishingAnimation()
     {
-        IsAlive = false;
-        EnemyState = EnemyStates.Dying;
+        if(gameObject != null)
+        {
+            IsAlive = false;
+            EnemyState = EnemyStates.Dying;
 
-        Anim.SetBool("isAlive", IsAlive);
-        yield return null;
+            Anim.SetBool("isAlive", IsAlive);
+            yield return null;
 
-        yield return new WaitForSeconds(.6f);
+            yield return new WaitForSeconds(.6f);
 
-        Destroy(gameObject);
+            Destroy(gameObject);
 
-        yield return null;
-
+            yield return null;
+        }
     }
 
     public IEnumerator ReceiveDamage(int takenDamage)
@@ -76,7 +81,7 @@ public class EnemyBasicAI : EnemySettings
             Anim.SetBool("isReceivingDamage", false);
         }
 
-        if (Health <= 0)
+        if (gameObject != null && Health <= 0)
         {
             StartCoroutine(WanishingAnimation());
         }

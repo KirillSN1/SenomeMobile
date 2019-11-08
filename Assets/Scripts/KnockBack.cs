@@ -25,9 +25,10 @@ public class KnockBack : MonoBehaviour
 
     public IEnumerator KnockBackLast(Rigidbody2D objToKnock)
     {
+        yield return new WaitForSeconds(KnockTime);
         if (objToKnock != null)
         {
-            yield return new WaitForSeconds(KnockTime);
+         //   yield return new WaitForSeconds(KnockTime);
             objToKnock.velocity = Vector2.zero;
         }
     }

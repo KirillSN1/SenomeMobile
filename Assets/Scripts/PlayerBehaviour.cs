@@ -14,7 +14,8 @@ public class PlayerBehaviour : MonoBehaviour
     public int Health = 5;    // значение здоровья игрока не менять!
     public int Attack = 1;
     public float Speed = 4;
-    public int SightDistance = 1;   // поле зрения игрока
+   // public int SightDistance = 1;   // поле зрения игрока
+    public Transform Vision;
 
     [Range(1, 10)]
     public float JumpingVelocity;
@@ -57,7 +58,6 @@ public class PlayerBehaviour : MonoBehaviour
     private KnockBack _knockBack;      // экземпляр класса KnockBack, который отталкивает противника
     public AudioSource AClip;
 
-
     //  public enum PlayerStates { Idling, Jumping, Attacking, Walking, Dying };
     // public PlayerStates playerState = PlayerStates.Idling;
 
@@ -73,13 +73,15 @@ public class PlayerBehaviour : MonoBehaviour
 
     void Update()
     {
+     
         if (Health <= 0)
         {
             IsAlive = false;
         }
 
         Motion();
-        AnimationController();    
+        AnimationController();
+
     }
 
     public IEnumerator ReceiveDamage(int takenDamage)
@@ -133,28 +135,26 @@ public class PlayerBehaviour : MonoBehaviour
         }
 
 
-        isGrounded = Physics2D.OverlapCircle(Feet.position, feetRadius, Groundlayer);
+       isGrounded = Physics2D.OverlapCircle(Feet.position, feetRadius, Groundlayer);
         AnimationController();
     }
 
 
     public void DetectEnemy()              // определяем, что враг находится в поле зрения игрока
     {
-        _currentPosition = new Vector2(transform.position.x, transform.position.y);
-        _endPosition = new Vector2(transform.position.x + SightDistance, transform.position.y + SightDistance);
+        _currentPosition = new Vector2(transform.position.x, Vision.position.y);
+        _endPosition = new Vector2(Vision.position.x, Vision.position.y);
 
         var hits = Physics2D.LinecastAll(_currentPosition, _endPosition);
 
         foreach (var obj in hits)
         {
             var target = obj.collider.gameObject;
-    
-            if (target.CompareTag("EnemyAttackRadius"))   // игрок увидел зону атаки противника
-            {
-                var nearestEnemy = target.transform.parent.gameObject;
 
-                 StartCoroutine(AttackTheEnemy(nearestEnemy));           // атаковать противника
-                _knockBack.HitSomeObject(nearestEnemy);
+            if (target.CompareTag("Enemy"))   // игрок увидел противника
+            {
+                StartCoroutine(AttackTheEnemy(target));           // атаковать противника
+                _knockBack.HitSomeObject(target);
             }
             else
             {
@@ -204,9 +204,13 @@ public class PlayerBehaviour : MonoBehaviour
         }
     }
 
-    void OnDrawGizmosSelected()      // рисует радиус атаки игрока
-    {
-       Gizmos.color = Color.blue;
-       Gizmos.DrawWireSphere(transform.position, SightDistance);
+    void OnDrawGizmosSelected()      // показывает поле зрения игрока
+    {    
+        Gizmos.color = Color.red;
+
+        _currentPosition = new Vector2(transform.position.x, Vision.position.y);
+        _endPosition = new Vector2(Vision.position.x, Vision.position.y);
+
+        Gizmos.DrawLine(_currentPosition, _endPosition);
     }
 }

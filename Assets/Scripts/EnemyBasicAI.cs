@@ -72,13 +72,12 @@ public class EnemyBasicAI : EnemySettings
         Anim.SetBool("isReceivingDamage", true);
         yield return null;
 
-        yield return new WaitForSeconds(.6f);            // Knockback доделать
-
-        yield return null;
+        yield return new WaitForSeconds(.6f);    
 
         if (Anim != null)
         {
             Anim.SetBool("isReceivingDamage", false);
+            EnemyState = EnemyStates.Idling; 
         }
 
         if (gameObject != null && Health <= 0)
@@ -98,14 +97,14 @@ public class EnemyBasicAI : EnemySettings
         var distanceToTarget = Vector3.Distance(transform.position, Target.position);
 
 
-        if (distanceToTarget <= ChaseRadius)  // игрок в зоне преследования
+        if (distanceToTarget <= ChaseRadius && distanceToHome == 0 || distanceToTarget <= ChaseRadius && distanceToHome != 0)  // игрок в зоне преследования, а враг на HomePosition
         {
             EnemyState = EnemyStates.Running;
             transform.position = Vector3.MoveTowards(transform.position, toTarget, Speed * Time.deltaTime);
 
             AnimateRunning(toTarget);
         }
-        else if (distanceToTarget > ChaseRadius && distanceToHome != 0)    // игрок вышел за пределы радиуса преследования, но не дошел до HomePosition
+        else if (distanceToTarget > ChaseRadius && distanceToHome != 0)    // игрок вышел за пределы радиуса преследования, но враг не дошел до HomePosition
         {
             EnemyState = EnemyStates.Running;
             transform.position = Vector3.MoveTowards(transform.position, toHomePosition, Speed * Time.deltaTime);
@@ -114,9 +113,10 @@ public class EnemyBasicAI : EnemySettings
         }
         else
         {
-            Anim.SetBool("isRunningEnemy", false);      // idle state
             EnemyState = EnemyStates.Idling;
+            Anim.SetBool("isRunningEnemy", false);      // idle state
         }
+        
 
     }
 
@@ -155,7 +155,7 @@ public class EnemyBasicAI : EnemySettings
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, ChaseRadius);
 
-        //   Gizmos.color = Color.green;
-        //   Gizmos.DrawWireSphere(transform.position, StoppingDistance);
+        Gizmos.color = Color.blue;
+        Gizmos.DrawLine(transform.position, Target.position);
     }
 }

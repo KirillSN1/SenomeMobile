@@ -171,7 +171,7 @@ MonoBehaviour:
   IsAlive: 1
   Health: 5
   ChaseRadius: 3
-  HomePosition: {x: 0.39, y: -1.61, z: 0}
+  HomePosition: {x: -33.9, y: -1.61, z: 0}
   Target: {fileID: 0}
   Anim: {fileID: 1829401115}
   EnemyState: 0
@@ -186,7 +186,6 @@ GameObject:
   - component: {fileID: 1607642192232262241}
   - component: {fileID: 1607642192232262243}
   - component: {fileID: 1584317413}
-  - component: {fileID: 2119526622}
   m_Layer: 0
   m_Name: AttackRadius
   m_TagString: EnemyAttackRadius
@@ -248,20 +247,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.33835256, y: 0.29039678}
   m_EdgeRadius: 0
---- !u!114 &2119526622
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1607642192232262246}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9bdd8be1ed3f4e14585b12ca146c8bd9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  KnockBackSpeed: 7
-  KnockTime: 0.5
 --- !u!1 &4265281164396905885
 GameObject:
   m_ObjectHideFlags: 0
